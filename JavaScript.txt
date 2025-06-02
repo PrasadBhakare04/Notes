@@ -1,0 +1,1421 @@
+Index == Search tips for tips
+
+
+*Comparison operators*
+greater than >
+less than <
+greater than or equal to >=
+less than or equal to <=
+equality ==
+not equal !=
+strict equality ===
+strict non equality !==
+
+
+
+Characters and strings are compared based on there unicode value
+"=" is for assigning and "==" "===" are for checking
+"==" checks only the value and "===" checks for the value and type
+To print values in java script we use console.log()
+We can use console.warn console.error
+To get user input we use ''prompt("a message")''
+''parseInt()'' is used to convert the string into number
+TO LINK JAVASCRIPT TO HTML DOCUMENT USE ''<script src=>'' element
+ADD THAT AT THE END OF THE BODY IN THE HTML FILE
+
+
+CONDITIONAL STATEMENTS :-
+if
+else if
+else
+
+
+---------------------------------------------------------------------------------------
+
+
+
+
+Arrays 
+What is Array ?
+-> Array is an ordered list of one or more variables or object of different types
+   Elements are added and removed from the same end
+Sytax = "let variable = []"
+        "let variable = [1,2,3,4,"hello","world"]"
+Each ELEMENT of the array has index and index starts from 0
+LENGTH of Array is one less than the maximum index
+To access the data from the array we use index of that element
+Example variable[4] we will get "hello"
+We can change the value of element at an index as follows
+variable[4] = "notHello"
+now the value of variable[4] is "notHello"
+
+ARRAY METHODS
+---push add to end---
+   Syntax------arr.push("element")
+
+---pop remove form the end---
+   Syntax------arr.pop()
+
+---shift remove from the start---
+   Syntax------arr.shift()
+
+---unshift add to start---
+   Syntax------arr.unshift("element")
+
+---concat concat two arrays and make a new one---
+   Syntax------let arr3 = arr1.concat(arr2)
+
+---includes if an array includes given value
+   Syntax------arr.includes("element")
+
+---indexOf checks if an element is present in array if present gives the index of it and if absent returns -1
+   Syntax------arr.indexOf("element")
+
+---reverse reverses the array---
+   Syntax------arr.reverse()
+
+
+---------------------------------------------------------------------------------------------------------------
+
+
+---Slice copies a portion of an array---
+   Syntax------arr.slice(start , end) copies element of start to end, not including end , creates new array without changing existing one
+
+---splice removes/replaces elements---
+   Syntax------arr.splice(start,how many to delete,options to add) changes the original array---how many to delete can be any integer
+   Example
+   let colors = ["Monday","Tuesday","Wednesday","Thursday"]
+   colors.splice(1,1,"Sunday") ---this will remove element at the index 1 and will replace it with Sunday
+   so colors = [Monday,Sunday,Wednesday,Thursday]
+   colors.splice(1,0,"Sunday") ---this will insert Sunday at the index 1
+   so colors = [Monday,Sunday,Tuesday,Wednesday,Thursday]
+
+---sort sorts the array---
+   Syntax------arr.sort()
+   This will compare the UTF-code and arrange them according to there UTF-code
+
+
+---NESTED ARRAY---
+Syntax arr = [[red,crimson],[orange,darkorange],[green,olive]]
+arr[1][1]
+so the output will be darkorange
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+Object literals
+
+Objects are collection of properties
+Properties - key value pair
+We can access data using custom keys rather than index
+Declaration---
+  const obj = {key : value , key : value}
+Accessing---
+  obj["key"] or obj.key
+Every key is converted into STRING except SYMBOL
+Modify---
+  obj.key = newVal
+  obj[key] = newVal
+Adding---
+  obj.newKey = val
+
+QUESTION
+const restaurant = {
+    name: 'Ichiran Ramen',
+    address: `${Math.floor(Math.random() * 100) + 1} Johnson Ave`,
+    city: 'Brooklyn',
+    state: 'NY',
+    zipcode: '11206',
+}
+In index.js, you'll find a restaurant object that contains a name, address, city, state, and zipcode. 
+Your task to is to create a variable named fullAddress that points to a string using the information from restaurant. 
+fullAddress should point to a string that includes the address, city, state, and zipcode from the restaurant object. Make sure to add any necessary commas or spaces between the values as seen in the exact expected output format shown below.
+To make it harder to "cheat" by copy and pasting, I've randomly generated the address portion.    For example, if address was "64 Johnson Ave", the fullAddress variable would look like this:
+"64 Johnson Ave, Brooklyn, NY 11206" // this is the expected output format of the fullAddress string (keep an eye on the commas and/or spaces between the values and match that too!)
+
+SOLUTION #1:
+const fullAddress = `${restaurant.address}, ${restaurant.city}, ${restaurant.state} ${restaurant.zipcode}`;
+
+SOLUTION #2:
+const fullAddress = `${restaurant["address"]}, ${restaurant["city"]}, ${restaurant["state"]} ${restaurant["zipcode"]}`;
+
+SOLUTION #3:
+const fullAddress = restaurant.address + ", " + restaurant.city + ", " + restaurant.state + " " + restaurant.zipcode;
+
+------------------------------------------------------------------------------------------------------------------
+
+for of loop---
+for(variable of iterable_thing){
+   some function
+}
+iterable things = array,strings
+
+for in loop---
+this is for iterating over objects
+for(variable in object){
+   some function
+}
+this will give keys only
+
+Object methods---
+Object.values(object_name)
+Object.entries(object_name)
+
+----------------------------------------------------------------------------------------------------------
+
+JavaScript Functions---
+Reusable code that we can use any number of time
+Defining a function---
+function function_name(parameters if any){
+ // do something
+}
+calling a function---
+function_name(argument)
+
+Every method is a function
+
+'return' is used to capture value to save to some variable
+It stops the execution of the function
+Returns only single value
+
+-------------------------------------------------------------------------------------------------------------
+
+Scope of the function or variable
+Scope can be called as visibility usability of a variable or function after declaring it
+
+Function Scope------------------
+example
+function birdWatch(){
+	let Bird = 'Peacock';
+	console.log(Bird)
+}
+birdWatch();
+Output = Peacock;
+
+let Bird = 'Pegeon';
+function birdWatch(){
+	let Bird = 'Peacock';
+	console.log(Bird)
+}
+birdWatch();
+Output = Peacock;
+
+let Bird = 'Pegeon';
+function birdWatch(){
+	console.log(Bird)
+}
+birdWatch();
+Output = Pegeon;
+
+Note----
+We can access the variables declared inside a function directly but we cannot access variables declared inside a block directly
+
+Block Scope--------------------------
+Example 
+function test(){
+	let marks = 35
+}
+console.log(marks);
+Output = 35;
+
+if(radius > 10){
+	let r = 30
+}
+console.log(r);
+Output = ERROR !!!
+
+This is called block It includes 
+Conditionals
+Loops etc 
+
+Lexical Scope-------------------------
+funtion Parent(){
+	let Bird = 'Pegeon';
+	function child(){
+		console.log(Bird)
+	}
+	function child();
+}
+Output = Pegeon;
+Child function have access to the variables declared in parent function
+But not vice Versa
+
+-----------------------------------------------------------------------------------------------------------
+
+Function Expression------
+let add = function(x,y){
+	return x + y;
+}
+add(3,4);
+Output = 7
+the functionn dont have name
+declaring variable as function
+
+Higher Order Functions -------
+Functions that accepts or retuns a function
+function f(){
+	let a = Math.floor(Math.random() * 6) + 1;
+	console.log(a)
+}
+function rollDie(f){
+	f()
+}
+
+-----------------------------------------------------------------------------------------------------
+
+Methods--------
+Methods are the functions which are properties of objects
+
+Window is the default higher order object and all defined functions are properties of it if not specified explicitly
+
+-------------------------------------------------------------------------------------------------
+
+This Keyword
+Sound = {
+    s: 'hello',
+    give() {
+        console.log(this.s)
+    }
+}
+let meow = Sound.give;
+meow(); //This won't give any output
+
+Sound.give(); //This will give result as hello
+
+
+--------------------------------------------------------------------------------------------------------
+ARRAY METHODS-----
+
+setTimeout method---
+Syntax 
+array.setTimeout(function(){},Time){Body}
+Time in miliseconds
+
+setInterval method---
+Syntax
+array.setInterval(function(){},Time){Body}
+Time in miliseconds
+This is used to repeat the function  after the time interval
+
+clearInterval(id) to stop the execution 
+id contains the value of the Interval
+
+FILTER METHOD---
+Syntax
+array.filter(function (x) {
+    return condition on element of the array
+})
+
+EVERY---
+arr.every(function(){return condition on element of the array})
+SOME---
+arr.some(function(){return condition on element of the array})
+
+REDUCE---
+arr.reduce(function(oldValue,currValue){
+ return expression,condition etc
+})
+The returned value is stored in the oldValue
+
+-----------------------------------------------------------------------------------------------------------------
+
+SPREAD---
+const nums = [13, 4, 5, 21, 3, 3, 1, 2, 7, 6, 4, 2, 53456];
+// SPREAD IN FUNCTIONS
+math.max is method to find out the max number which accepts parameters
+Math.max(nums) //NaN
+Math.max(...nums) //53456
+
+
+// SPREAD IN ARRAYS
+const cats = ['Blue', 'Scout', 'Rocket'];
+const dogs = ['Rusty', 'Wyatt'];
+
+const allPets = [...cats, ...dogs];
+allPets;
+// ['Blue', 'Scout', 'Rocket', 'Rusty', 'Wyatt']
+
+
+// SPREAD IN OBJECTS
+const feline = { legs: 4, family: 'Felidae' };
+const canine = { isFurry: true, family: 'Caninae' };
+
+const catDog = { ...feline, ...canine };
+the order matters so the family of the catdog will be family of Canine
+
+
+const dataFromForm = {
+    email: 'blueman@gmail.com',
+    password: 'tobias123!',
+    username: 'tfunke'
+}
+const newUser = { ...dataFromForm, id: 2345, isAdmin: false }
+This will copy properties of the dataFromForm to the newUser
+
+-----------------------------------------------------------------------------------------------------
+
+REST---
+function sum(...nums) {
+    return nums.reduce((total, el) => total + el)
+}
+
+
+function raceResults(gold, silver, ...everyoneElse) {
+    console.log(`GOLD MEDAL GOES TO: ${gold}`)
+    console.log(`SILVER MEDAL GOES TO: ${silver}`)
+    console.log(`THANKS TO EVERYONE ELSE: ${everyoneElse}`)
+}
+calling the funtion
+raceResult('abc', 'def', 'ghi', 'jkl')
+// GOLD MEDAL GOES TO: abc
+// SILVER MEDAL GOES TO: def
+// THANKS TO EVERYONE ELSE: ghi, jkl
+
+This is to accept multiple arguments if we don't know the exact number of arguments
+-----------------------------------------------------------------------------------------------------------
+
+DEFAULT PARAMETERS---
+function multiply(a,b=1)
+multiply(2,3)
+2*3
+//6
+multiply(2)
+2*1
+//2
+
+--------------------------------------------------------------------------------------------------------------
+
+DESTRUCTURING---
+Copying values of properties of object, arrays etc into variables
+
+Destructuring Arrays---
+
+const scores = [929321, 899341, 888336, 772739, 543671, 243567, 111934];
+const [gold, silver, ...rest] = scores;
+// gold = 929321
+// silver = 899341
+// rest = 772739, 543671, 243567, 111934
+
+Destructuring Objects---
+const user = {
+    email: 'harvey@gmail.com',
+    password: 'sCoTt1948sMiTh',
+    firstName: 'Harvey',
+    lastName: 'Milk',
+    born: 1930,
+    died: 1978,
+    city: 'San Francisco',
+    state: 'California'
+}
+
+const user2 = {
+    email: 'Stacy@gmail.com',
+    firstName: 'Stacy',
+    lastName: 'Gonzalez',
+    born: 1987,
+    city: 'Tulsa',
+    state: 'Oklahoma'
+}
+const {email, firstName, lastName} = user
+// email = harvey@gmail.com
+// firstName = Harvey
+// lastName = Milk
+
+const {email, firstName : name, born : birthYear = 'N/A } = user2
+// email = Stacy@gmail.com
+// name = Stacy
+// birthYear = N/A
+// printing born will give you error
+
+Destructuring Parameters---
+function fullName({ firstName, lastName }) {
+    return `firstName = ${firstName} lastName = ${lastName}`
+}
+fullName(user);
+// firstName = Harvey
+// lastName = Milk
+
+------------------------------------------------------------------------------------------
+
+CALL STACK---
+
+when we are calling multiple functions;
+The functions which are at the last gets added to stack
+Then if the added  function needs callback of another function then that function gets added to the stack
+
+Example - 
+function square(x){
+	return x*x;
+}
+
+function checkRight(a, b, c){
+	if(square(a)+square(b) === square(c)){
+		return true
+	}
+	else {
+		return false
+	}
+}
+
+so the function checkRight will get added to the Call Stack and we see that it requires calling of square function so square function will get added to the Call Stack and will get executed first 
+
+
+------------------------------------------------------------------------------------------
+
+CALLBACK HELL---
+When we are calling multiple function to do a task
+
+Example-
+
+function delayedColorChange(newColor, delay, doNext) {
+    setTimeout(function () {
+        document.body.style.backgroundColor = newColor;
+        doNext && doNext()
+    }, delay)
+}
+delayedColorChange('red', 3000, () => {
+    delayedColorChange('blue', 3000, () => {
+        delayedColorChange('green', 3000)
+    })
+})
+
+delayedColorChange('red', 3000, function () {
+    delayedColorChange('blue', 3000, function () {
+        delayedColorChange('green', 3000)
+    })
+})
+
+-----------------------------------------------------------------------------------------
+
+ASYNC and AWAIT Keyword
+
+-----------------------------------------------------------------------------------------
+
+AJAX - Asynchronous JavaScript And XML
+AJAJ - Asynchronous JavaScript And JSON
+JSON - JavaScript Object Notation
+
+HTTP verbs - GET POST PUT etc
+HTTP Status Codes - 200 OK, 404 ERROR Not Found, etc
+HTTP Headers - Key:value pairs while sending a request to a web Page
+
+-----------------------------------------------------------------------------------------
+
+XHRS
+FETCH
+AXIOS
+
+------------------------------------------------------------------------------------------
+
+* Object Prototypes---
+
+Mechanism using which objects can show Inheritance Properties
+We can create properties on the Prototypes and we can use these properties with other objects
+Syntax Object.prototype.propertyName = function(){};
+Where Objects can be String Array etc
+----------Following approach will create a unique function for each object created and not for prototype-------
+function color(r, g, b) {
+    const col = {};
+    col.r = r;
+    col.g = g;
+    col.b = b;
+    return col
+}
+
+
+
+
+
+* The NEW keyword and things it does----
+----------Following approach will create a function for prototype-------
+function Color(r, g, b){
+	this.r = r;
+	this.g = g;
+	this.b = b;
+};
+Color.prototype.rgb = function(){
+	const{r, g, b} = this;
+	console.log(`rgb(${r}, ${g}, ${b})`)
+};
+
+const c = new Color(255, 69, 90);
+
+The names of the function starts with Capital Letters
+Creates a blank, plain JavaScript object;
+Links (sets the constructor of) this object to another;
+Passes the newly created object from Step1 as the this context;
+Returns this if the function doesn't return its own object;
+
+
+*Constructor Functions-----------
+class Color {
+    constructor(r, g, b, name) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.name = name
+    }
+    rgb() {
+        const { r, g, b } = this
+        return `rgb(${r},${g},${b})`
+    }
+}
+
+
+*Defining Classes Extends and Super Keyword----
+Extends---
+Extends Keyword is used to make child class of a Class
+If a method is not defined for the child class it will call the function of the Parent
+class Pet {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age
+    }
+    eat() {
+        return `${this.name} is eating`
+    }
+}
+class Cat extends Pet {
+    meow() {
+        return `meow`
+    }
+}
+class Dog extends Pet {
+    bark() {
+        return `woof`
+    }
+}
+
+
+Super---
+This will reference to the parent class constructor
+
+class Pet {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age
+    }
+    eat() {
+        return `${this.name} is eating`
+    }
+}
+class Cat extends Pet {
+    constructor(name, age, lives) {
+        super(name, age);
+        this.lives = lives
+    }
+    meow() {
+        return `meow`
+    }
+}
+
+------------------------------------------------------------------------------
+
+Terminal is a tool by which we can interact with the computer it provides more functionality
+Shell is the program that run on the terminal
+Bash is one of the popular Shell
+
+
+*Commands LS PWD CD MKDIR TOUCH RM
+pwd - print working directory
+ls - list
+cd - change directory, cd.. used to go one folder upp
+mkdir - make directory or empty folders
+rm = rm -rf foldername will delete the directory along with the data in it 
+	where rf is tag
+     rmdir is used to delete an empty directory	
+touch - to create file
+
+ 
+*Relative vs Absolute paths - when we use cd in a path it looks for the folder in that folder i.e. relative path
+ and if we type the entire path from the c and user it is called as absolute path
+
+------------------------------------------------------------------------------
+
+NODE JS---
+What is node ?
+-> It's a JavaScript Runtime, Using this we can run the JavaScript Outside the browser
+   Server side implementation of JavaScript.
+
+REPL - Read Evaluate Print Loop
+
+node filepath or filename.js - To Run the code
+
+Scope is global
+
+process.argv it is a method which returns array first value will be Command-Line arguments passed which node is called and the second value will be the path of the file
+
+-----------------------------------------------------------------------------------------------
+
+TO install a package using gitbash
+npm i packageName
+
+To install it globally
+npm i -g packageName
+
+eg
+const jokes = require('give-me-a-joke');
+jokes.getRandomDadJoke(function(joke){
+	console.log(joke)
+	}
+)
+
+To get i/p from the bash
+const args = process.argv.slice(2);
+process.argv is an array that contains command line arguments passed to the Node.js process.
+The first element (process.argv[0]) is the path to the Node.js executable.
+The second element (process.argv[1]) is the path to the JavaScript file being executed.
+By using slice(2), the code creates a new array (args) containing only the arguments passed after the script name.
+
+------------------------------------------------------------------------------------------------------------------
+
+
+
+***********************Express is the frame work for web dev to create servers using node.*************************
+
+
+Request is an object created by express based upon the incoming http request
+
+
+const express = require('express');
+const app = express();
+app.use((req, res)=>{
+	console.log('<h1>This is the response</h1>)
+})
+
+app.get('/cats', (req, res) => {
+	console.log('Cat Request');
+})
+
+app.typeOfRequest()
+
+Routes are arranged in order
+the  '*' path matches everything and should be used at the end only
+if we send a res we cannot send another res again
+
+req.query gets the query
+
+app.get('/search', (req, res) => {
+    const { q } = req.query;
+    res.send(`Query is ${q}`);
+})
+
+to add query search?q=queryString
+
+app.get('/r/:subreddit, (req, res) => {
+	const {subreddit} = req.params;
+	console.log('this is ${subreddit} subreddit)
+})
+The req.params returns the string entered after /r/
+we add ':varaible' to get the what is the request
+
+----------------------------------------------------------------------------------------------------------------
+
+
+
+***************************EJS Embedded JavaScript****************************
+
+
+
+Just install the ejs using npm i ejs command 
+Don't need to require explicitly just use following in the code
+app.set('view engine', 'ejs');
+
+To respond the req with some res
+We create a folder called 'views' and create the ejs file to respond on some request
+
+To respond with the ejs file
+app.get('/', (req, res) => {
+	res.render('filename');
+})
+
+It looks the file and evaluate if there is any JavaScript in the file if there is it will convert it into HTML and give the result.  
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+**************************************Setting a different path *************************************8
+
+
+--app.set('views', path.join(__dirname, '/views'));
+here __dirname is the path where we are working and we are setting it to views
+
+app.get('/random', (req, res) => {
+    let num = Math.floor(Math.random() * 10) + 1;
+    res.render('random.ejs', { num });
+})
+Here when we access random we are passing the object nums which contains random number value from 1 to 10
+and we are passing this by res.render() to the random.ejs file which contains 
+html 
+<h1> Your random number is <%= num %> </h1>
+
+
+--------------------------------------------------------------------------------------
+
+Saving the static files/*assets* such as a css file or a javascript file
+app.use(express.static('Public')) this if the folder is in the same folder as index.js
+
+
+app.use(express.static(path.join(__dirname, 'Public')));
+this when not
+
+
+----------------------------------------------------------------------------------------------
+
+
+Sending body through request 
+req.body- by default it is undefined
+we use express.json and express.urlencoded as middlewares to convert the body into required format such as json or binary etc
+
+app.use(express.json()) - to tell the routes to use the miiddleware
+app.use(express.urlencoded({extended : true })) - used when we are parsing data through url and via form
+
+
+
+--------------------------------
+
+
+******************************What is mongoose?**************************
+
+
+--Mongoose is a middleware to connect mongoDB to NodeJS.
+ORM for SQL databases Relational
+It is ODM Object Data/Document Mapper
+Used to validate data, define schema build complex queries with the help of JS
+
+* Model - the structure and organization of data within the database. 
+
+* Schema - the structure of an object like the attributes it has the datatype of that attributes.
+
+
+const movieSchema = mongoose.Schema({
+    title: String,
+    rating: Number,
+    date: String
+});
+This creates a schema of Movie
+
+const Movie = mongoose.model('Movie', movieSchema);
+This create a model named Movie using the movieSchema that we are storing in Movie
+
+const movie1 = new Movie({ title: "Hello", rating: 4.5, date: '25/02/2004' });
+Creates instance of class Movie(Model)
+
+in gitBash
+node>.load db.js>movie1.save()
+
+If we call Movie.insertMany({key:value}), this directly inserts the data into mongoDB we don't need to call the .save() method
+
+---------------------------------------------------
+
+
+
+***************************Mongoose Middleware****************************
+
+
+To run some function before or after certain functions
+
+schema.pre('action', function(next){
+	//body;
+	next()
+}) - for running code beforehand
+
+schema.post('action', function(next){
+	//body;
+	next()
+}) - for running code after
+
+NOTE - RUN THE NEXT() FUNCTION AT THE END THIS CONTINUES THE EXECUTION OF REMAINING CODE
+
+schema.pre('save', function(next) {
+  // do stuff
+  next();
+});
+
+schema.pre('save', function() {
+  return doStuff().
+    then(() => doMoreStuff());
+});
+
+// Or, using async functions
+schema.pre('save', async function() {
+  await doStuff();
+  await doMoreStuff();
+});
+
+-----------------------------------------------------------------------------------------
+
+
+
+\
+***************Mongoose with Express**************************
+
+
+NOTE - Always use async and await
+
+To make the dropdown list have value selected from the database 
+
+This in Router file
+const categories = ['fruit', 'vegetable', 'dairy'];
+app.get('/products/:id/edit', async (req, res) => {
+    const { id } = req.params
+    const foundProduct = await Product.findById(id);
+    res.render('products/edit', { foundProduct, categories })
+})
+
+This in EJS file
+<select name="category" id="category">
+            <% for(let category of categories) {%>
+                <option value="<%= category%>" <%=foundProduct.category===category ? 'selected' : '' %>><%= category%>
+                </option>
+                <% } %>
+</select>
+
+
+----------------------
+To filter the products using category
+
+In Router-
+
+app.get('/products', async (req, res) => {
+    const { category } = req.query;
+    if (category) {
+        const products = await Product.find({ category: category });
+        res.render('products/index', { products, category })
+    }
+    else {
+        const products = await Product.find({});
+        res.render('products/index', { products, category: 'All' })
+    }
+})
+
+In EJS-
+
+Category : <a href="/products?category=<%= product.category%>">
+                <%= product.category%>
+            </a>
+This is just to create link which has Query String category in it whhich we can extract using req.query in JS(Router) file
+
+
+------------------------------------------------------------
+
+
+**********************Express Middleware***************************
+Concept of middleware
+Defining Custom Middleware
+Morgan Logger Middleware
+
+
+Middleware is just a function
+Each Middleware has access to the request and response objects
+Middleware can end the HTTP Request by sending back a response
+Middleware can be chained together
+using next middleware function
+
+Morgan middleware
+const morgan = require('morgan')
+app.use(morgan('tiny'))
+
+***********Custom Middlewares***********
+Middleware folder
+
+This will run for every api
+
+app.use((req, res, next) => {
+	console.log("This is a custom middleware");
+	next();
+	console.log("This is the body after next()")     //This will execute after whole code is executed so it is recommended 
+							 //to not to put any thing after next
+})
+
+
+To set for individual api we can use
+app.use('/dogs', (req, res, next) => {
+    console.log('This middleware is for dogs api');
+    next();
+})
+
+We can console.log(req.path);
+to get which path we sent request to 
+
+also we can do like console.log(path.method);
+to get which method was like get post, put, delete, etc
+
+
+******AUTHENTICATION enabling password for specific routes**************
+This is the function to check if the password is correct-
+const verifyPassword = function (req, res, next) {
+    const { password } = req.query;
+    if (password === 'secretkey') {
+        next()
+    }
+    else {
+        res.send('you need a correct password')
+    }
+}
+
+Here we are passing three things path, callback function, another callback function
+As we can add as many callback function, we are using our verifyPassword function at the starting
+So when it verifies the password it calls next() function which will execute the call back function 
+which is after the first callback function
+
+app.get('/secret', verifyPassword, (req, res) => {
+    res.send('Welcome back chief')
+});
+
+
+------------------------------------------------------------------------------------------------------------
+
+***********************Handling Errors*******************************************
+Express Builtin error handlers
+Defining Custom Error handlers
+Handling Async Errors
+working with mongoose errors
+Defining Custom Errors
+
+Use this to explicitly throw error
+throw new Error("Error occurred")
+
+
+Use this to respond with something when error occurs
+This is used to define your custom errors
+Use this at the end of router file just above app.listen
+This will prevent the throw new Error method 
+However we can get the error in "err" argument and we can console.log that
+app.use((err, req, res, next) => {
+    console.log('**************************************************')
+    console.log('********************Error*********************')
+    console.log('**************************************************')
+    next();
+})
+
+If we pass the err argumeent to next(err) like this, this will call next error handling middleware 
+But if we don't pass anything to it, it will call the next non error handling middleware
+
+
+Defining our own custom error class
+
+class AppError extends Error {
+    constructor(status, message) {
+        super();
+        this.status = status;
+        this.message = message;
+    }
+}
+module.exports = AppError;
+
+Just by making this class all is setup for us automatically just require this in the router file
+        throw new AppError(401, "Error occurred")
+
+You have to use the following error handler to give response
+We are doing this to reduce the overhead too write message and status code for each error
+The default Error of the javaScript do not have message parameter to it but our defined one have
+
+app.use((err, req, res, next) => {
+    const { status = 500, message = "Something went wrong" } = err;
+    res.status(status).send(message);
+})
+
+
+
+------
+Handling async function 
+we cannot direclty throw an error in async funtion like we did above
+we have to pass the error to next() function
+
+app.get('/home', async(req, res, next) => {
+	const product = await Product.findById({req.id});
+	if(!product){
+		next(throw new AppError(404, "Error Not Found"));
+	}
+	else{
+		res.render("/someejs");
+	}
+})
+
+app.get('/home', async(req, res, next) => {
+	const product = await Product.findById({req.id});
+	if(!product){
+		return next(throw new AppError(404, "Error Not Found"));
+	}
+	res.render("/someejs",{product});
+})
+
+Remember we have use return or else 
+because the res.render will continue to make the someejs and will hit the request but it wont recieve any name of the product or schema
+for more info watch udemy section 42 video 453
+
+
+------------------------------
+
+This was about the errors generated by express but what about the errors generated by mongoose 
+We can handle those errors by using try and catch block
+
+app.post('/products', async(req, res, next) => {
+	try{
+		const {name, price, description } = req.body;
+		const product = await Product.findById({req.id});
+		await product.save();
+	}
+	catch (e){
+		next(e);
+	}
+})
+
+To avoid adding try catch block again and again We can define Async Utility function
+watch udemy section 42 video 454
+This is solved in new Express so you don't need to do this handling errors of async function is resolved
+Look at the documents
+
+
+----
+Handling types of mongoose errors 
+So there are many types of mongoose errors and we can handle different types accordingly
+
+const handleValidation = function (err){
+	console.dir(err);
+	return throw new AppError(`validation...${err.message}`, 400);
+}
+app.use((err, req, res, next) => {
+	if(err.message === "ValidationError"){
+		err = handleValidation(err)
+	}
+	next(err)
+})
+
+
+
+
+-------------------
+Adding JOI validation
+const JOI = require('joi')
+
+app.post('/campground', catchAsync(async (req, res, next) => {
+    const campGroundSchema = JOI.object({                     we can move this to another file and export campGroundSchema
+        campground: JOI.object({			      	
+            title: JOI.string().required(),
+            price: JOI.number().required().min(0),
+            location: JOI.string().required(),
+            image: JOI.string().required(),
+            description: JOI.string().required()
+        }).required()
+    }).required();
+    const { error } = campGroundSchema.validate(req.body);             create a function which has this body
+    if (error) {							the function should be a middleware that means it
+        const msg = error.details.map(el => el.message).join(",");	will have three args (req, res, next)
+        throw new ExpressError(msg, 400);				if there is an error just throw new error else call next
+    }
+    const newCampground = new Campground(req.body.campground);
+    await newCampground.save();
+    res.redirect(`/campground/${newCampground._id}`)
+}));
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+SQL relationship review
+Relatioships in sql are done using tables
+primary keys and foreign keys referencing primary keys of another table
+
+***********************Data Relationship in Mongo******************************
+--   One to Few
+
+In This type of relationships we directly embed data into documents
+for eg. One user can have many addresses but not like 1000 or so
+	        In this case we can directly save the addresses in document of the user
+		Another reason to do that is we will not access the address without accessing user
+		Here we can directly store the multiple addresses in one document 
+We create the address field as an Array and we can pass many addresses to that
+The address Array will also have an _id mongoose does that by default we can turn it of by setting _id attribute for the address as 
+_id : { id : false}
+
+const modelSchema = new mongoose.Schema({
+    name: String,
+    addresses: [
+        {
+            state: String,
+            city: String,
+            pincode: Number,
+
+        }
+    ]
+});
+
+
+--One to Many 
+Here one object has many values of products 
+for e.g A farm can have many fruits and fruits can be produced in many farms in that case it is one to many relationship
+const farmSchema = new Schema({
+    name: String,
+    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }]   //this is used to make the products field an array which stores object ids and references them
+})
+the products can be array or just one property
+while giving input to the array we will directly send the product object 
+Note ***In database it only stores the Object ids*****
+
+
+--Populate Function
+db.farm.find()
+this will give you farms in that product will only contain object ids
+
+db.farm.find().populate('Product', 'name') args after product are the specific field of Product you want to show in this case just show the name
+this will give you products with details
+
+---------------------------------------------------------------------------------------
+
+****************************Express with Mongo Relationships******************************
+app.post('/farm/:id/products/new', async (req, res) => {
+    const { id } = req.params;
+    const foundFarm = await Farm.findById(id);
+    const newProduct = await new Product(req.body);
+    newProduct.farm = foundFarm;
+    foundFarm.products.push(newProduct);
+    await newProduct.save();
+    await foundFarm.save();
+    res.send(foundFarm);
+})
+In this way we can save the product 
+
+app.get('/farms/:id', async (req, res) => {
+    const foundFarm = await Farm.findById(req.params.id).populate('products');
+    // const products = await foundFarm.products.populate();
+    res.render('farms/show', { foundFarm });
+})
+This way we can get individual product
+
+
+-----Mongoose Middleware to delete products related to one entity
+
+farmSchema.post('findOneAndDelete', async function (farm) {
+    if (farm.products.length) {
+        await Product.deleteMany({ _id: { $in: farm.products } })
+    }
+})
+
+Add this before creating model
+There are many more middlewares like this
+
+
+
+app.delete('/campground/:id/reviews/:reviewId', catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/campground/${id}`)
+}))
+
+
+
+
+-----------------------------------------------------------------------
+
+*********************Express router and cookies**********************
+
+---------Express router basics
+--Express has another way to create api's which start with same prefix
+	/shelter
+	/shelter/edit
+	/shelter/new
+	/shelter/:id
+	etc
+	So we can make all this routes in one file and call these routes using the following 	router
+	const router = express.Router()
+	This makes the router as small app so we can do something like
+	router.get('/new', (req, res)=>{ function })
+	and just export this router
+	and in main file 
+	we can do like
+	const sheltterroutes = require('./routes/shelter')
+	app.use('/shelter, shelterroutes);
+	
+We can have middlewares to the router
+if we do something like
+in the routes file
+router.use((req, res, next) =>{ })
+This will apply the middleware only to that routes 
+
+--------------------Understanding cookies 
+cookies are little bits of information that are stored in a user's browser when browsing a particular website
+
+Once a cookie is set, a user's browser will send the cookie on every subsequent request to the site
+
+Cookies allows the HTTP to be statefull
+We can use cookies to remember information of the user
+for e.g remembering that the user uses dark mode on the website 
+
+We can send a cookie like this
+app.get('/getName', (req, res) => {
+	res.cookie(name, value)
+	res.send("sent you a cookie")
+})
+
+
+To access the information of the cookies we have to use cookie parser
+-----------------------Cookie Parser
+We need to install cookie parser
+const cookieParser = require('cookie-parser)
+app.use(cookieParser())
+so every request has property cookies
+req.cookies
+this cookie will be available throughout the link
+
+
+----------------------Signed Cookie Parser
+Digital signature 
+To verify the integrity
+verify that something is not changed
+instead of sending the cookie directly send the cookie signed
+This will be used to check if the cookie is manipulated or not
+
+we can do this like this
+app.use(cookieParser('Thisismysecret');
+res.cookie('name', 'value', {signed : true})
+
+Signed cookie can be accessed using
+req.signedCookies
+
+HMAC signing
+
+
+-----------------------------------------------------------------------------
+
+Session
+Similar to cookies but sessions are stored on server rather than client
+Sessions are more secure than cookies
+Sessions have more storage than cookies
+for e.g 
+	on e commerce you can add items to cart without loging in this cart is stored in session having some id
+	store the data on server rather than in database Session Store(redis), Mongo Session Store
+
+***************Express Session*********************
+You can use session in pythin java and other language 
+
+const session = require('express-session');
+const sessionOptions = { secret: 'thisisnotagreatesecret', resave: false, saveUninitialized : false } //resave is used to store the session even if it is not modified during the request																				// saveUninitialized is used to store uninitialized session
+
+router.use(session(sessionOptions));
+
+router.get('/view', (req, res) => {
+    if (req.session.count) {
+        req.session.count += 1;
+    }
+    else {
+        req.session.count = 1;
+    }
+    res.send(`You have visited ${req.session.count} times`)
+
+The count is just a variable which a session contain
+
+
+
+---------connect-flash
+Used to send flash messages
+
+to use the flash we have to first setup the session
+const flash = require('connect-flash');
+app.use(flash())
+req.flash('success'(anyname), 'Successfully sent a text')  //Use this where you want to create flash message use this before res.redirect('/home)
+res.render('home', { messages: req.flash('success') }); //Use this where you want to redirect in our case it is home request
+And you can use the messages variable in the view (ejs file)
+
+
+we can make this as a middleware also 
+app.use((req, res, next) =>{
+	res.locals.messages = req.flash('success') // here the locals every route will have access to locals.messages and we dont need to pass the messages
+	next()										variable to each views while redirecting
+})
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+*************Authentication and Authorization from scratch****************
+
+Authenctication and authorization
+Authentication means identifying the user
+Authorization means idenntifying permissions what the user is able to do or not able to do
+Authorizations happens after Auuthorization
+
+
+--Never store your password as it is
+Cause if someone just hacks your database the hacker can just get the password and most of users use the same password for more than one website so the user can get in trouble
+
+--Hashing functions
+input some data and converts into some series of characters
+It gives same output for the same input 
+
+we store this hashed password in our database and when loging in when the user enters the password we hash that and compare that hashed password with the hashes password stored in database
+
+The hashed string cannot be reversed to get the input
+ 
+--salt
+Extra step before storing
+we add some random  salt 'String' to the password before hashing  it  this adds extra safety
+hacker can make a file which contains all commonly used password and their hashed values and use this to hack someone's account to avoid that we add salt to the password it makes the hashed value radically different from password without the salt
+
+e.g findingnemo = 94f27cbbdfc18ce732839596e52e26926ae819b9b912279ef85baa911914109b
+findingnemoLOL = b01f92573e31a9e3e922749293723b4fcf1df4042e73840118cf08cf035165da
+
+as you can see
+so add salt to the password before storing the password 
+
+
+--Hash funtion
+We are using 'bcrypt'
+We have various methods 
+We don't need to store the salt bcrypt.compare(pw, hashedpw) automatically finds out the salt from the hashedpw
+
+const hashPassword = async function (pw) {
+    const hash = await bcrypt.hash(pw, 12);  //The 12 is the rounds of salt to be added greater the number more complex the salt but will take much more time time grows exponentially
+									     //The pw is the password entered by the user
+    console.log(hash);
+}
+
+const login = async function (pw, hash) {
+    const isTrue = await bcrypt.compare(pw, hash); //It compares the new enterd password with the hashed password in the database
+											    // There is no need to store the salt bcrypt automatically detects the salt from the stored password
+    if (isTrue) {
+        console.log('logged in');
+    }
+    else {
+        console.log('Incorrect password')
+    }
+}
+
+
+To keep the user logged in
+we store the user._id in session if the password entered was correct
+and after registering
+
+To logout 
+make  the userid stored in session as null
+or 
+you can destroy the entire session by calling the method
+req.session.destroy()
+
+You can make a middleware to check if you are logged in or not
+const isLoggedin = async function (req, res, next){
+	if(!req.session.user){
+		res.send("You are not logged in");
+		return;
+	}
+	else{
+		next()
+	}
+}
+
+**MongoTips**
+Move the logic related to models to the models file 
+such as checking if the user and password matches
+or doing something before like changing password or hashing the password
+or doing something after like deleting the related reviews after the model has been deleted 
+You can use userSchema.pre or post or statics 
+pre for before
+post for after
+and static to make callable functions
+
+
+
+------------------------------------------------------------------------------------------------

@@ -1,0 +1,117 @@
+------React Events------
+
+* click event--
+function handleClick(){
+    console.log("You clicked a Button");
+}
+export default function Clicker(){
+    return <>
+        <h1>Click Me</h1>
+        <button onClick = {handleClick}>Click Me !!!</button>
+    </>
+}
+
+in react we add inline events as shown in above example
+we added onClick event on the button which will call the handleClick() function defined above (callback Function)
+
+You can find multiple events on "mdn" docs
+like onMouseOver, onDblClick, onMouseOver etc
+
+* Form event
+<form onSubmit = {handleSubmit}></form>
+function handleSubmit(e){
+    e.preventDefault();
+    console.log('You submitted the form')
+}
+This will prevent the default behaviour which is it refreshes the webpage
+
+
+
+
+------React State BASIC(React Hook)------ hook is a function provided by react which has some functionality
+Data specific to an instance of a component. CAN CHANGE
+This must be used in the component
+
+export default function Counter(){
+    let num = 0;
+    function handleSubmit(){
+        console.log(num);
+        num += 1;
+    }
+    return <>
+        <p>The count is : {num}</p>
+        <button onClick={handleSubmit}>Increment</button>
+    </>
+}
+In this example the value of num changes but react does not know so it will display the "0"
+
+What goes in state ?
+Data fetched from an API
+Form information
+A variable that decides whether something is showing or hidden
+Anything that you think that "will change" goes into the "state"
+
+const[count, setCount] = useState(0)
+count will have the value of current state and setCount is the function that return the value or value that replaces the original value
+useState returns the array with "count and setCount" values
+
+One component can have multiple useState
+
+
+
+
+------React State Intermediate------
+setCount(currentCount => currentCount + 1)  //currentCount will have the latest value of count
+setCount(currentCount => currentCount + 1)
+
+if we do like this in a function the click will increment value by 2
+if we had done like the old the value would have increased by 1 only because before rendering the component the value still remain one
+
+State Initializer function
+const [board, setBoard] = useState(generateGameBoard);
+we will just pass the function and not call it because if we call it it will execute every time the state changes even though the value won't be used
+
+
+Working with objects
+Working with objects is slightly different because react sees the identity of the thing which is passed to that
+like when we pass object to useState and change something inside the object the object itself is not changed the memory address is the same
+it is same with arrays also
+
+import { useState } from "react";
+export default function ScoreKeeper(){
+    const [scores, setScores] = useState({p1Score : 0, p2Score : 0});
+    
+    function increaseP1Score(){
+        setScores(oldScore => {
+            return {...oldScore, p1Score : oldScore.p1Score + 1}
+        })
+    }
+
+    function increaseP2Score(){
+        setScores(oldScore => {
+            return {...oldScore, p2Score : oldScore.p2Score + 1}
+        })
+    }
+    return (
+        <div>
+            <p>Player 1 : {scores.p1Score}</p>
+            <p>Player 2 : {scores.p2Score}</p>
+            <button onClick={increaseP1Score}>+Player 1</button>
+            <button onClick={increaseP2Score}>+Player 2</button>
+        </div>
+    )
+}
+In this example we can see that when we pass an object to useState if we want to change something inside object we have to create a new object
+For that reason we are using the spread operator which creates a new object
+
+for adding and deleting an element from the array is also similar we have to create a new array each time we do some operation on it
+for that we have to use the spread and filter operator
+emojis.filter(e => e.id !== id) this will create a new array which does not have the element with the id === id(argument)
+
+for eg  function deleteEmoji(id){
+        setEmoji(oldArr => {
+            return oldArr.filter(e => e.id !== id)
+        })
+    }
+
+COMMON ARRAY UPDATING PATTERNS FILE  INSIDE PRASAD CODES FOLDER HAS FEW COMMON UPDATIONS THAT CAN BE DONE ON ARRAY

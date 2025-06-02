@@ -1,0 +1,36 @@
+React Routing
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+inside App component
+return <>
+<Router>
+  <Routes>
+    <Route path='/' element = {[<Navbar/>, <Home/>]}/>
+    <Route path='/' element = {[<Navbar/>, <About/>]}/>
+  </Routes>
+</Router>
+</>
+This adds the apis/routes to our website so that we can navigate to them using buttons or navigation bar
+
+Navigate using Button---
+inside Home we have a button to go to About Api and render About component we can do that as follows
+import { useNavigate } from 'react-router-dom'
+export default function Home(){
+	const navigate = useNavigate();
+	return <button
+	onClick={ () => { navigate('/About') } }
+	>About</button>
+}
+When we click on the button it will go to localhost:5173/About and render the About component
+
+Navigate using NavigationBar---
+inside Navbar Component file
+
+import { NavLink } from 'react-router-dom'
+export default function Navbar(){
+	return <>
+	<nav>
+	<NavLink to='/'>Home</NavLink>
+	</nav>
+	</>
+}

@@ -1,0 +1,121 @@
+NextJS
+It is framework based on React
+it provides various features like file based routing, app based routing
+And many more features which helps us to build large scale projects
+
+By default all the components in Next are server side components
+we have to use "use client" at the start of the file to make it a client side component
+
+Server side components means they are run on the Server rather than on Client (i.e on browser)
+
+Note - To use hooks of react the component must be a client component
+       We can use client component inside a server component
+       
+       we can make Navbar as client component and use Hooks in it and render the Navbar in page.js file which is a server side
+       component	
+ 
+ 
+Video 123 --------------
+Link Script Image components provided by NextJS
+
+1) Link is same as Navlink in React - help to navigate without reloading the page
+Link href
+
+2) Script - used to use javascript inside return of a component
+	<Script>
+	 { `
+	 	JavaScript	
+	 ` }
+	</Script>
+Script has many props check the documentation
+
+3) Image - used to render images but accepts many props to optimize the Rendering of image
+	To use this we have to import it and make changes in next.config.js
+
+
+Video 124 --------------
+Post request demo
+
+we use "NextResponse" to send the response of the request
+
+TO add api to the nexxt app we make a folder
+api                                  //Mandatory folder to add all the apis in one folder
+	add			     //This is the name of the api like localhost:3000/api/add
+		routes.js	     //This contains the actual route the middleware and the actual request call
+		
+		
+the "routes.js" file
+import { NextResponse } from "next/server";
+export async function POST(request) {
+    const data = await request.json();
+    console.log(data);
+    return NextResponse.json({message : "Succcess", data : data})
+}
+
+the request can be made from any component of app
+  const data = { name : "Prasad", role : "Developer"};
+  async function handleClick(){
+    const req = await fetch('/api/add', {method : "POST", headers : {
+      "Content-Type" : "application/json",
+    },
+    body : JSON.stringify(data),
+  })
+  let res = await req.json();      //This contains the the "NextResponse"
+  console.log(res)  
+}
+
+
+Video 125 --------------
+SERVER actions
+
+Server actions are used when we need to perform some functions server
+
+Usecases = after submitting the form store the data into database or do some action on server
+
+<form action={submitAction}> //make the action to be a function which is a sever side component
+
+"use server"
+export async function submitAction(e){
+    console.log(await e.get("name"));
+    //any server action such as storing the form data into databases etc
+  }
+  
+We can make the function inside a folder and inside a js file which will contain all the functions which are SERVER actions
+
+//NOTE - this sends the request to the same link and does not refreshes the page and clear the form after submit
+
+
+Video 126 --------------
+MIDDLEWARES - 
+middleware are the function which has access to both request and response object
+these are used when we want to perform some action before the request hit its api
+
+"middleware.js" file inside the root folder that is my-app folder
+
+import { NextResponse } from 'next/server'
+ 
+// This function can be marked `async` if using `await` inside
+export function middleware(request) {
+  return NextResponse.redirect(new URL('/', request.url))
+}
+ 
+// the above middleware runs when the request hits one of the following url pattern
+// in this case any api like about/home about/user etc
+export const config = {
+  matcher: '/about/:path*',
+}
+
+// This can be used when you want to use multiple middlewares since only one middleware file is supported we can create multiple functions and call them using conditionals for specific path 
+
+import { NextResponse } from 'next/server'
+ 
+// the "rewrite" shows the response of /about on the api /about-2 without redirecting it means without changing the url
+export function middleware(request) {
+  if (request.nextUrl.pathname.startsWith('/about')) {
+    return NextResponse.rewrite(new URL('/about-2', request.url))  
+  }
+ 
+  if (request.nextUrl.pathname.startsWith('/dashboard')) {
+    return NextResponse.rewrite(new URL('/dashboard/user', request.url))
+  }
+}

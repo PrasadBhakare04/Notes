@@ -1,0 +1,1 @@
+mongoose manages default connection object responsible for connection

@@ -1,0 +1,77 @@
+🛠️ DevOps for Backend Developers (Fresher Roadmap)
+🔰 Phase 1: Basic Deployment (Must-Know)
+Get your projects live on the internet.
+
+✅ What to Learn:
+Git & GitHub (you probably already use it)
+
+Environment variables using .env files
+
+Free deployment platforms:
+
+Render
+
+Railway
+
+Vercel (for frontend / full stack)
+
+Glitch (for small demos)
+
+How to deploy your backend project (Node.js + MongoDB)
+
+📦 Tools:
+dotenv for config
+
+nodemon for local dev
+
+MongoDB Atlas for remote DB
+
+🐳 Phase 2: Containerization Basics (Nice-to-Have)
+Learn how to run your app in any environment using Docker.
+
+✅ What to Learn:
+What is Docker and why it’s used
+
+Dockerfile for Node.js app
+
+Basic docker build and docker run commands
+
+How to link containers (e.g., Node.js + MongoDB)
+
+📦 Tools:
+Docker Desktop
+
+Docker Hub (optional)
+
+🔁 Phase 3: CI/CD Basics
+Automate testing and deployment every time you push to GitHub.
+
+✅ What to Learn:
+What is CI/CD
+
+GitHub Actions:
+
+Setup workflows
+
+Auto deploy to Render or Vercel
+
+Optionally try: Jenkins (when you're more advanced)
+
+☁️ Phase 4: Basic Cloud Deployment (Bonus)
+Try deploying manually on cloud services like AWS (optional but useful)
+
+✅ What to Learn:
+Launching an EC2 instance (Ubuntu)
+
+Installing Node.js and MongoDB on it
+
+Deploying your project manually (just like a real server)
+
+Using pm2 to keep your app running
+
+📦 Tools:
+AWS Free Tier
+
+EC2, S3 (for file storage)
+
+Nginx as reverse proxy (later)

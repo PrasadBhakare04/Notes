@@ -1,0 +1,71 @@
+To check if repository is added
+git remote -v
+
+To add or change the repository
+git remote add origin <your-repo-URL>
+git push -u origin main
+
+To check the name of the branch (was master in older versions but is main in newer versions)
+git branch
+
+To rename the branch from master to main
+git branch -m master main
+
+If you are still on head and you want to create main branch
+git checkout -b main
+git add .
+
+To add files to upload this adds only updated files
+git add .
+
+git commit -m "Initial commit"
+git push -u origin main
+
+If you just made a commit and want to undo it
+To keep the changes in file but to remove from commit
+git reset --soft HEAD~1
+
+
+To check the name and email id of the user
+git config --global user.name
+git config --global user.email
+
+To change the user name and id
+git config --global user.name "your github name"
+git config --global user.email "email"
+
+To change the name of the user who is committing the change (after initial commit)
+git commit --amend --author="PrasadBhakare04 <prasadbhakare.5@gmail.com>"
+git push --force
+
+To check everything is working fine
+git status
+git branch
+git remote -v
+
+To revert back to last committed changes
+Do this first
+git reset --hard origin/main
+
+If above not worked
+git fetch origin
+git reset --hard origin/main
+
+Link Local Git to GitHub Repo
+git init
+git remote add origin https://github.com/your-username/my-repo-name.git
+git branch -M main
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+
+To delete committed changes 
+git stash
+
+To fetch a specific commit with its hash code
+git checkout <code>
+
+to get the code 
+git log -1 (gives last commited code)
+git log or git log --oneline (gives the log of commits)
+

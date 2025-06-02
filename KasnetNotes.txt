@@ -1,0 +1,25 @@
+What is going to get validated when you create a VM ?
+--Azure Policy
+
+what is azure policy ?
+--Policy checks if we are allowed to create VM in that Rgeion and zone
+
+scalability - scaling resources up and down
+elasticity - the ability to quickly increase or decrease computing resources to meet changing demands
+agility - quick action
+fault tolerance - machine should be up in almost all conditions
+disaster control - disaster recovery and backup
+high availability - machine should be up and available
+
+IF you shut down your machine do you need to pay the bill ?
+--Yes, you have to pay the amount for the storage
+But if you delete the data and  delete the machine also you don't have to pay any amount
+
+
+Compute Services
+-VM
+-Container Instance
+-Virtual machine scale set
+-Kubernets
+-App Services
+-Function

@@ -1,0 +1,273 @@
+--Authentication Library 
+Passport
+Includes various login methods like google, facebook, twitter or your local login method
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const passportLocalMongoose = require('passport-local-mongoose');
+
+const userSchema = new Schema({
+    email: {
+        type: String,
+        required: true
+    }
+})
+userSchema.plugin(passportLocalMongoose);
+
+Automatically adds password field to the user
+This makes sure that the usernames are unique and store the password after hashing
+
+In model--
+const passportLocalMongoose = require('passport-local-mongoose');
+const userSchema = new Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    }
+})
+userSchema.plugin(passportLocalMongoose);
+
+As you can see here we don't need to add username and password field inside the userSchema
+the plugin function does this all
+
+
+In server file -- 
+the app.use fields you have to use it after defining session
+app.use(session('Secret'))
+
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.get('/makeUser', async (req, res) => {
+    const user = new User({ email: 'prasad@gmail.com', username: 'Prasad' });
+    const newUser = await User.register(user, 'chicken');    //chicken is the password
+    res.send(newUser);
+})
+
+here you can see you can store the username and password without defining it in model
+
+//The function authenticate is provided by  passport to check and validate the input
+router.post('/login', passport.authenticate('local', { failureFlash: 'true', failureRedirect: '/login' }), (req, res) => {
+    req.flash('success', 'You are now Logged in');
+    res.redirect('campground')
+})
+
+//This isAuthenticated function automatically checks the session and checks  if the user is logged in or not
+if (!req.isAuthenticated()) {
+        req.flash('error', "You must be logged in !");
+        return res.redirect('/login');
+    }
+
+
+//Using passport another method is added to the body which is logout which removes the user from the session and logs them out
+router.get('/logout', (req, res) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        else {
+            req.flash('success', "Logged out successfully");
+            res.redirect('/campground');
+        }
+    })
+})
+
+req.user contains the if the current user is logged in or not we can use this to display contents only when the user is logged in
+
+//In the register route to automatically login with the regsitered user
+ const registeredUser = await User.register(user, password);
+req.login(registeredUser, err => {  
+            if (err) return next(err);
+            req.flash('success', 'You are now logged in!');
+            res.redirect('/campground');
+        });
+
+
+//Middleware
+
+const isLoggedIn = function (req, res, next) {
+    if (!req.isAuthenticated()) {
+        req.session.returnTo = req.originalUrl;      //This stores the url which user wanted to go before it got redirected to login route
+        req.flash('error', 'You must login first !');
+        return res.redirect('/login');
+    }
+    else {
+        next();
+    }
+}
+const storeReturnTo = (req, res, next) => {
+    if (req.session.returnTo) {
+        res.locals.returnTo = req.session.returnTo;  //  //This stores the url which user wanted to go before it got redirected to login route
+    }
+    next();
+}
+module.exports.storeReturnTo = storeReturnTo;
+module.exports.isLoggedIn = isLoggedIn;
+
+
+We used this middleware in login route
+we will run this url
+and will check if returnTo url is there or not if it is we will redirect them to that url or specified
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Added author to the campgrounds
+done this by adding author field for campground and before saving the campground adding the user id stored in req.user._id
+added basic authorization to campground show page by hiding the edit and delete buttons if the currentUser != campground.author this is done in show.ejs file
+
+
+Why we are adding the middlewares even though we are hiding the options to add, edit, delete button ?
+-> Because we want to prevent someone to edit that using postman
+
+
+To populate authors of Review
+const campground = await Campground.findById(req.params.id)
+        .populate(
+            {
+                path: 'reviews',
+                populate: {
+                    path: 'author'
+                }
+            }
+        )
+        .populate('author');
+first populates reviews and author of the campground
+also authors of the review
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+Implementing MVC framework
+Model
+View 
+Controller
+till now we are done with model and view now we implement controller
+
+added stars rating using github repo lunar logic starability
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+To parse images through form we have to set the enctype attribute to multipart/form-data
+<form action="/route" method = "POST" enctype = "mutlipart/form-data"></form>
+<input type="file" name="image" id="" multiple>  //type multiple only if you want multiple images input
+
+
+The express cannot directly pass the files so we have to use "multer" package
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' })	//uploads is the destination folder but we don't do like this we usually store the files on cloud and store the 													  cloud links in our database
+
+app.post('/', upload.single('image'), (req, res) => {		//if we want to do multiple files we have upload.array
+        console.log(req.body, req.file);						//The image is the name given to the input
+    });
+
+
+We are going to use "Cloudinary" cloud service to store our images there are many other options like aws azure
+
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
+});
+
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: 'Yelpcamp',
+        allowedFormats: ['png', 'jpg', 'jpeg']
+    }
+})
+
+module.exports = {
+    cloudinary,
+    storage
+}
+
+upload.array('image') //use this in the route before callback function and validation because multer first uploads the image and then provide us body and req.file
+
+
+
+------------------------------
+To delete Images from mongoose as well as from cloudinary
+
+
+<div class="mb-3">
+                    <% campground.images.forEach((img, i)=> { %>
+                        <img src="<%= img.url%>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" name="deleteImages[]" id="image-<%=i%>" value="<%= img.filename%>"> //after submitting the form by checking 																														the checkboxes of the respt. images
+                        </div>																				we will get the value i.e filename of the images inside 
+                        <label for="image-<%=i%>">Delete</label>											deleteImages[] we will use that to delete images from
+                        <% }) %>																				MongoDB as well as from cloudinary
+</div>
+
+const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    await campground.images.push(...imgs);
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            cloudinary.uploader.destroy(filename);
+        }
+        await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } }) //this deletes the images from the campground.images 																										array
+    }
+we have to do this before saving the campground in update route
+
+
+Displaying only thumbnail on edit page instead of displaying the whole image
+const imageSchema = new Schema({
+    url: String,
+    filename: String
+})
+imageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200');
+})
+
+we created a virtual named thumbnail which will have the url
+https://res.cloudinary.com/dooupj3vv/image/upload/v1740315991/Yelpcamp/zedtyfkcltajsdgfim0y.jpg
+here if we add/w_200 after /upload it will display the image having only 200 px this is exactly done by virtual
+and this api is provided by cloudinary
+
+so now instead of displaying img.url we will display img.thumbnail
+
+
+---------------------------------------------------------------------
+Added Maps
+
+<script>
+        const campgrounds = {features : <%-JSON.stringify(campgrounds)%>}; //we pass the campgrounds array as features because mapbox expects it to be 																				feature
+        const mapToken = '<%- process.env.MAPBOX_TOKEN%>'
+    </script>
+    <script src="/javascripts/homePageCluster.js"></script>  //The file where we want to send the above data
+
+
+--------------------------------------------------------------------------------
+
+html sanitize used to prevent the user from entering html codes in place of campground names and etc
+mongo sanitize used to prevent user from doing mongo injection
+
+---------------------------------------------------------
+
+connect-mongo package
+used to store the session in mongo st0re instead of local storage it automatically deletes it after some days(14 days maybe)
+const mongoStore = require('connect-mongo');
+const store = mongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60, //resave after if nothing is updated
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+})
+const sessionConfig = {
+    store,
+    ...rest of the code

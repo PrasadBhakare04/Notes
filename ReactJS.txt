@@ -1,0 +1,497 @@
+
+
+--------------Making A Todo list---------
+everything is got by material UI
+To store the list into local storage we are using 
+useEffect(() => { 
+		localStorage.setItem("todos", JSON.stringify(todos)) 
+	}, [todos]
+);
+so whenever todos change it will store it into localStorage under the todos key or object
+
+
+
+-------------------------------------------------------------------------
+
+
+
+Using sockets for realtime communication
+in FullStack Folder inside USER directory 
+React and Express connection commit
+
+
+
+
+What is React ??
+React is a JavaScript library  
+You need to be familiar with JS to learn the javascript
+
+React basics
+Vite - Vite is a tool to create react applications
+Props
+React Events
+useState
+useEffects
+Controlled Forms
+Material UI
+Component design 
+React Patterns
+
+React is a frontend library that helps us to build interfaces from components 
+Various components are made to make a whole website componets may include html and css
+This make the website modular 
+
+
+
+
+ 
+---------------------------------------------------------------------------------------------------
+
+
+
+App is the highest  level in React same as index in HTML
+
+Every component we make is the component of App
+Every component is JavaScript functions which returns JSX content
+We can create multiple functions (components)
+
+Syntax 
+funtion Greet(){}  //The first letter of the function name should be capital
+
+We render our own component inside the App
+
+function Ourcomponent(){
+	return(
+		<h1>Hello world</h1>
+	)
+}
+
+export default App(){
+	return(
+		<Ourcomponent/>
+	);
+}
+
+
+
+----------------------------------------------------------------------'
+
+
+
+import app from "./App"
+this is an  example of using es6 modules it is used to easily share code between files
+it is powered by webpack behind the scenes
+
+There are many ways in which you can export in react 
+export default function Greeter(){
+	return <h1>Hello world !</h1>
+}
+
+OR
+function Greeter(){
+	return <h1>Hello world !</h1>
+}
+export default Greeter;
+
+OR
+For exporting multiple functions
+function Greeter(){
+	return <h1>Hello</h1>
+}
+
+function Name(){
+	return <h1>World</h1>
+}
+export {Greeter, Name}
+
+
+
+------------------------------------------------------------------------------------------------
+
+
+
+React Rules
+Some html tags don't have a closing tag
+ like input, br so while returning them in a function you have to  use '/' at the end of tag
+ e.g <br/>
+   <input type = "text"/>
+To return multiple elements we have to wrap them inside one parent element
+export default function Func(){
+	return <div>
+		<input type = "text" name = "username" />
+		<input type = "password" name="password"/>
+	</div>
+}
+
+export default function Func(){
+	return ( 
+		<div>
+			<input type = "text" name = "username" />
+			<input type = "password" name="password"/>
+		</div>
+	)
+}
+
+If you don't want any wrapper element you can use 
+React Fragments 
+export default function Func(){
+	return ( 
+		<>//this is the react fragment
+			<input type = "text" name = "username" />
+			<input type = "password" name="password"/>
+		</>
+	)
+}
+
+
+we can evaluate js expression in react using {}
+e.g
+export default function Func(){
+	return <p>{1+2+3} Hello World </p>   {anything inside of {} will be treated as JavaScript
+}
+
+
+
+TO include styles in your elements
+to give class to an elemtnt we have to use keyword className and not class as class is a reserved keyword in JavaScript
+to give css we have to import the css in specific file 
+for e.g
+you give style to a componet die you can import the css in that file
+
+import './styles/die.css
+export default function Die(){
+	return <h1 className = "Die">Die</h1>
+}
+like this 
+but remember that the scope of the file is not limited you can have a different element have that style just by giving the className  
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+React Props-
+Props are like arguments that we can provide to out components
+we use props to make configurable components 
+<Greeter name = "Prasad"/>
+function Greeter (props){
+	props.name  //The value will be Prasad
+}
+
+passing other than string
+<Greeter number = {20} />
+We can pass any element in that {} like array, object etc
+
+Default values 
+function Greeter ({name = "Prasad"})
+
+React conditions
+There is  folder in  first-vite-app called additionals in that there is a file called Lucky in that there is use of conditionals with different approaches
+
+
+We can apply styles like this also (inline css)
+function(){
+	const styles = {color  : "purple" fontSize : "40px"}
+	return <div style = {styles}>Hello</div>
+}
+ or
+	return <div style = {{color  : "purple" fontSize : "40px"}}>Hello</div>
+like this
+
+check additionals folder for more
+
+
+
+---------------------------------------------------------------------------------------------------------------
+
+The "key" prop
+it is the unique identifier for the element this can be from database or set by us
+key = {i.id}
+where element i has id attribute
+
+
+
+
+------React Events-------------------------------------------------------------------------
+
+* click event--
+function handleClick(){
+    console.log("You clicked a Button");
+}
+export default function Clicker(){
+    return <>
+        <h1>Click Me</h1>
+        <button onClick = {handleClick}>Click Me !!!</button>
+    </>
+}
+
+in react we add inline events as shown in above example
+we added onClick event on the button which will call the handleClick() function defined above (callback Function)
+
+You can find multiple events on "mdn" docs
+like onMouseOver, onDblClick, onMouseOver etc
+
+* Form event
+<form onSubmit = {handleSubmit}></form>
+function handleSubmit(e){
+    e.preventDefault();
+    console.log('You submitted the form')
+}
+This will prevent the default behaviour which is it refreshes the webpage
+
+
+
+
+------React State BASIC(React Hook)------ hook is a function provided by react which has some functionality
+Data specific to an instance of a component. CAN CHANGE
+This must be used in the component
+
+export default function Counter(){
+    let num = 0;
+    function handleSubmit(){
+        console.log(num);
+        num += 1;
+    }
+    return <>
+        <p>The count is : {num}</p>
+        <button onClick={handleSubmit}>Increment</button>
+    </>
+}
+In this example the value of num changes but react does not know so it will display the "0"
+
+What goes in state ?
+Data fetched from an API
+Form information
+A variable that decides whether something is showing or hidden
+Anything that you think that "will change" goes into the "state"
+
+const[count, setCount] = useState(0)
+count will have the value of current state and setCount is the function that return the value or value that replaces the original value
+useState returns the array with "count and setCount" values
+
+One component can have multiple useState
+
+
+
+
+------React State Intermediate------
+
+setCount(currentCount => currentCount + 1)  //currentCount will have the latest value of count
+setCount(currentCount => currentCount + 1)
+
+if we do like this in a function the click will increment value by 2
+if we had done like the old the value would have increased by 1 only because before rendering the component the value still remain one
+
+State Initializer function
+const [board, setBoard] = useState(generateGameBoard);
+we will just pass the function and not call it because if we call it it will execute every time the state changes even though the value won't be used
+
+
+Working with objects
+Working with objects is slightly different because react sees the identity of the thing which is passed to that
+like when we pass object to useState and change something inside the object the object itself is not changed the memory address is the same
+it is same with arrays also
+
+import { useState } from "react";
+export default function ScoreKeeper(){
+    const [scores, setScores] = useState({p1Score : 0, p2Score : 0});
+    
+    function increaseP1Score(){
+        setScores(oldScore => {
+            return {...oldScore, p1Score : oldScore.p1Score + 1}
+        })
+    }
+
+    function increaseP2Score(){
+        setScores(oldScore => {
+            return {...oldScore, p2Score : oldScore.p2Score + 1}
+        })
+    }
+    return (
+        <div>
+            <p>Player 1 : {scores.p1Score}</p>
+            <p>Player 2 : {scores.p2Score}</p>
+            <button onClick={increaseP1Score}>+Player 1</button>
+            <button onClick={increaseP2Score}>+Player 2</button>
+        </div>
+    )
+}
+In this example we can see that when we pass an object to useState if we want to change something inside object we have to create a new object
+For that reason we are using the spread operator which creates a new object
+
+for adding and deleting an element from the array is also similar we have to create a new array each time we do some operation on it
+for that we have to use the spread and filter operator
+emojis.filter(e => e.id !== id) this will create a new array which does not have the element with the id === id(argument)
+
+for eg  function deleteEmoji(id){
+        setEmoji(oldArr => {
+            return oldArr.filter(e => e.id !== id)
+        })
+    }
+
+COMMON ARRAY UPDATING PATTERNS FILE  INSIDE PRASAD CODES FOLDER HAS FEW COMMON UPDATIONS THAT CAN BE DONE ON ARRAY
+
+We can also pass function as props just like any other objects
+
+
+
+
+-----------------React FORMS-------------------
+form has its own state which is NOT controlled by React but it is not right the form state should be controlled by REACT that's why we have to do something like this
+
+import { useState } from "react"
+export default function Form(){
+    const [username, setUsername] = useState("");
+    function changeUsername(evt){
+        setUsername(evt.target.value);
+    }
+    return <>
+        <input type="text" placeholder = "Enter your username" value={username} onChange={changeUsername}/>
+        <span style={{display: "block"}}>{username}</span>
+        <button>Submit</button>
+    </>
+} 
+
+this will make the FORM HAVE STATE PROVIDED AND CONTROLLED BY REACT
+
+
+
+----------------------React Hook Form------
+It is a hook used for validations of the form which provides various inbuilt validation functions
+
+
+
+
+---------------React Hook useEffect ------------------------
+it is used to do something when a component rerenders this function can be modified like to run only for first rerender or when a state has desired
+value
+
+syntax-
+ useEffect(function myEffect() {
+        console.log("my effect was called", [dependencies])  //pass [] empty array as dependency to run useEffect only for first render (mount)
+        return () => {
+        	//This function runs when a component is unmounted or removed
+        }
+    })
+    
+first parameter is a callback function
+second parameter contains the variables which are going to change and run only when that variables change
+the return function runs when a component is unmounted
+
+but if we pass empty array [] it will run only when first render 
+check the useEffect commit and asyncUseEffect for learning api fetching 
+
+
+
+---------------React Hook useRef------------------------
+
+Note -- do not use the useRef() values to render i.e don't return this in html because the change of these values won't cause the component to rerender
+
+First Use-----
+It is used to give the variable it persistent for e.g
+in a component when we declare a variable like
+let a = 0;
+useEffect(()=> {
+	a += 1;
+})
+but when some changes occur in the program and the component rerenders it will set the value of a again to 0
+
+so 
+const a = useRef(0);
+
+a.current += 1;
+this will do the job
+
+
+Second Use------
+you can use it to the dom manipulation also
+ const btnRef = useRef()
+ 
+ //This will change the color of the button to red
+ useEffect(() => {
+ 	btnRef.current.style.backgroundColor='red'
+ },[])
+ 
+ <button ref = {btnRef}></button>
+ 
+ 
+ 
+---------------React Hook useContext------------------------
+This is used to pass down the value from tree of components
+suppose there is a structure like
+App
+  Navbar
+    Button
+SO to pass the counter from App we have to pass it down using prop to first Navbar and then the Button to avoid this we use useContext Hook
+
+inside src make context folder inside that
+valueContext.js
+import {createContext} from 'react'
+export default const valueContext = createContext(0) - 0 is the initial value
+
+from where we want to pass the value in our case it is App.jsx
+import { valueContext } from './context/valueContext'
+
+and wrap the components where we want to pass the value inside 
+<valueContext.provider value={{count, setCount}}>  //count is the default state provided when we create a vite app
+<Button/>   //This is the component where we are passing the value of count
+</valueContext.provider>
+
+inside Button component
+import {useContext} from 'react'
+import { valueContext }from './context/valueContext'
+const value = useContext(valueContext)
+and now we can use the count value wherever we want in this component  value.count
+also we can use setCount value.setCount(count => { return count += 1 })
+
+Note----The value of the passed down parameter will change for everyone if changed inside a below component
+
+
+---------------React Hook useMemo------------------------(it memoizes the output means return the output from the cache for same input)
+
+To memoize the output of the function
+
+const data = useMemo( ( )=>{ any costly function which you want to run first and then memoize the result }, [ ] )
+inside the [] pass the argument on its change do the computation 
+if left empty the computation is done everytime just the result is given through the cache memory
+
+check the "useMemoHook/src/App.jsx" for more information
+
+This will rerender the Navbar only when the props are changed
+export default memo (function Navbar(){})
+
+
+
+---------------React Hook useCallback------------------------
+This is same as useMemo Hook but this is for the function itself
+
+In react when we rerender the a component all of its insides are reloaded into the memory the functions also and when this happens the "memo" thinks that the function is changed for that this is used
+
+This will keep the function as it in the memory based on the dependencies if dependencies are changed the function is rerendered means added in the memory
+
+const updateAdjective = useCallback(() => {
+  setAdjective(old => {
+    return old+'!'
+  })
+}, [count])
+
+
+
+---------------React Hook useForm------------------------
+It is in the fullstack folder
+
+Studied various methods like
+register, setError, handleSubmit, 
+displaying the validation errors etc look at the documentation for more
+
+
+
+---------------Redux ------------------------
+Redux is the single source of truth where all the states are stored
+Components store, reducer, action
+store : is what stores the data
+reducer : is what manipulates the data
+action : is what that tell the reducer to manipulate the data
+
+Check the documentation for the implementation
