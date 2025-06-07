@@ -119,3 +119,91 @@ export function middleware(request) {
     return NextResponse.rewrite(new URL('/dashboard/user', request.url))
   }
 }
+
+
+Video 127 --------------
+Auth.js library for authentication and signIn using Google, Github, Facebook etc
+
+make app/api/auth/[...nextauth]/route.js
+import NextAuth from "next-auth"
+import GitHub from "next-auth/providers/github"
+ 
+const handler = NextAuth({
+  providers: [
+    GitHub({
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET
+    })
+],
+})      
+export {handler as GET, handler as POST}
+
+and in the page where you want to show the button to signIn and signOut 
+the function to signIn and signOut are given by auth.js library
+
+"use client"
+import { useSession, signIn, signOut } from "next-auth/react"
+export default function Home() {
+  const { data: session } = useSession();
+  console.log(session)
+  if (session) {
+    return <>
+      Signed In as {session.user.email}<br />
+      <button onClick={() => { signOut() }}>SignOut</button>
+      <img src="https://avatars.githubusercontent.com/u/153743967?v=4"/>
+    </>
+  }
+  else {
+    return <>
+    Not signed In <br />
+    <button onClick={() => { signIn("github") }}>SignIn</button>
+    </>
+  }
+}
+
+
+Video 128 --------------
+the dynamic routes can be used as follows
+
+app/blogpost/[slug]/page.js                     This is folder structure
+
+the [slug] will contaion the parameter
+like localhost:3000/blogpost/prasad
+so slug will have value "prasad"
+
+and if i do [...slug]
+then it can have array of multiple values
+localhost:3000/blogpost/prasad/directory1/post2
+so params.slug = ["prasad", "directory", "post2"]
+
+export default function Page({ params }) {
+    return (
+        <div>
+            <h1>Blog Post: {params.slug}</h1>
+            <p>This is the content for the blog post with slug: {params.slug}</p>
+        </div>
+    );
+}
+
+
+Video 128 --------------
+Loyout in Next
+
+layout is just for making layout for the pages
+directory structure
+app
+	admin
+		login
+			page.js
+			
+		logout
+			page.js
+			
+		layout.js     //this will give layout to all the pages inside admin directory
+			      // But keep in mind that the layout of the outside folder will also be applied to this
+			      // like the layout.js file inside app folder on the same level as admin will also make changes to 
+			      // the layout so if there is navbar inside app and admin also both the navbar will be shown
+			      // first the app wala
+the link will be like localhost:3000/admin/login
+to make it like localhost:3000/login 
+rename the admin folder to (admin) adding paranthesis make them as group but don't affect the the links
